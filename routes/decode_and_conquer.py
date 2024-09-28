@@ -35,6 +35,11 @@ def evaluate():
                 }
             }
 
-    return Response(json.dumps(result), mimetype='application/json')
+    response = app.response_class(
+        response=json.dumps(result),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 
