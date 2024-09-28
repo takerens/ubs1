@@ -1,5 +1,6 @@
 import json
 import logging
+# import time
 
 from flask import request
 from flask import jsonify
@@ -13,6 +14,7 @@ def evaluate():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
 
+    # start = time.time()
     result = []
     for jsonData in data:
         correctionDict = {}
@@ -41,4 +43,6 @@ def evaluate():
 
     # logging.info("efficiency :{}".format(result))
     # return jsonify(result)
+    # end = time.time()
+    # print(end - start)
     return result
