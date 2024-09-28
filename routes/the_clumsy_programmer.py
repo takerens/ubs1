@@ -8,7 +8,6 @@ from routes import app
 
 logger = logging.getLogger(__name__)
 
-
 @app.route('/the-clumsy-programmer', methods=['POST'])
 def evaluate():
     data = request.get_json()
@@ -39,5 +38,5 @@ def evaluate():
         correctionDict["corrections"] = corrections
         result.append(correctionDict)
 
-        # logging.info("efficiency :{}".format(result))
+    # logging.info("efficiency :{}".format(result))
     return jsonify(result)
