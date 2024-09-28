@@ -4,15 +4,15 @@ import logging
 from flask import request, Flask
 from flask import Response
 
+from routes import app
 
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
 
 @app.route('/ub5-flags', methods=['GET'])
 def evaluate():
-    data = request.get_json()
-    logging.info("data sent for evaluation {}".format(data))
+    # data = request.get_json()
+    # logging.info("data sent for evaluation {}".format(data))
 
     result = {
                 "sanityScroll": {
