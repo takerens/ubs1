@@ -2,7 +2,7 @@ import json
 import logging
 
 from flask import request
-from flask import jsonify
+from flask import Response
 
 from routes import app
 
@@ -35,6 +35,6 @@ def evaluate():
                 }
             }
 
-    return result
+    return Response(json.dumps(result), mimetype='application/json')
 
 
