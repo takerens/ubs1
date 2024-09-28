@@ -35,6 +35,6 @@ def evaluate():
                 }
             }
 
-    return jsonify(result)
+    return result
 
 
