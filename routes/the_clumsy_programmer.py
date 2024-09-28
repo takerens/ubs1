@@ -25,9 +25,9 @@ def evaluate():
             for string in dictionary:
                 differences = 0
                 if (len(error) == len(string)):
-                    if differences >= 2:
-                        continue
                     for i in range(len(string)):
+                        if differences >= 2:
+                            break
                         if string[i] != error[i]:
                             differences += 1
                 if differences == 1:
