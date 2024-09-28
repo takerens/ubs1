@@ -21,44 +21,28 @@ def evaluate():
         if len(monsters["monsters"]) <= 1:
             result.append({"efficiency": 0})
         else:
-            
-            # monsterValues = monsters["monsters"]
-            # low = monsterValues[len(monsterValues) - 1]
-            # efficiency = 0
+            monstersArray = monsters["monsters"]
+            # State: charging or attacking
+            # if charge: i + 1
+            # if attack: i + 2
+            dp = {} # key = (i, charging) val = max_profit
 
-            # for i in range(len(monsterValues) - 2, -1, -1):
-            #     if monsterValues[i] < low:
-            #         efficiency += low
-            #         efficiency -= monsterValues[i]
-            #         low = monsterValues[i]
-            #     elif monsterValues[i] > low:
-            #         i -= 1
-            #         low = monsterValues[i]
-            #         continue
-            efficiency = 0
-            efficiencyList = []
-            track(monsters["monsters"], efficiency, 0, 'c', efficiencyList)
-            answer = max(efficiencyList)
-            if (answer < 0):
-                answer = 0
-            result.append({"efficiency": answer})
+            def dfs(index, charging):
+                if index >= len(monstersArray):
+                    return 0
+                if (index, charging) in dp:
+                    return dp[(index, charging)]
+                
+                if charging:
+                    charge = dfs(index + 1, not charging) - monstersArray[index]
+                    rest = dfs(index + 1, charging)
+                    dp[(index, charging)] = max(charge, rest)
+                else:
+                    attack = dfs(index + 2, not charging) + monstersArray[index]
+                    rest = dfs(index + 1, charging)
+                    dp[(index, charging)] = max(attack, rest)
+                return dp[(index, charging)]
+            result.append({"efficiency": dfs(0, True)})
 
     # logging.info("efficiency :{}".format(result))
     return jsonify(result)
-
-def track(list, value, index, task, efficiency):
-        if index == len(list):
-            efficiency.append(value)
-            return
-        elif task == 'a':
-            value += list[index]
-            track(list, value, index + 1, 'o', efficiency)
-        elif task == 'w':
-            track(list, value, index + 1, 'a', efficiency)
-            track(list, value, index + 1, 'w', efficiency)
-        elif task == 'c':
-            track(list, value - list[index], index + 1, 'a', efficiency)
-            track(list, value - list[index], index + 1, 'w', efficiency)
-        elif task == 'o':
-            track(list, value, index + 1, 'o', efficiency)
-            track(list, value, index + 1, 'c', efficiency)
