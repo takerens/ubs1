@@ -25,6 +25,8 @@ def evaluate():
             for string in dictionary:
                 differences = 0
                 if (len(error) == len(string)):
+                    if differences >= 2:
+                        continue
                     for i in range(len(string)):
                         if string[i] != error[i]:
                             differences += 1
@@ -33,7 +35,6 @@ def evaluate():
 
         for mistype in mistypes:
             corrections.append(search(mistype, dictionary))
-            print(mistype)
         
         correctionDict["corrections"] = corrections
         result.append(correctionDict)
