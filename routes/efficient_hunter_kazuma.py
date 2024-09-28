@@ -38,7 +38,10 @@ def evaluate():
             efficiency = 0
             efficiencyList = []
             track(monsters["monsters"], efficiency, 0, 'c', efficiencyList)
-            result.append({"efficiency": max(efficiencyList)})
+            answer = max(efficiencyList)
+            if (answer < 0):
+                answer = 0
+            result.append({"efficiency": answer})
 
     # logging.info("efficiency :{}".format(result))
     return jsonify(result)
