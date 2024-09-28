@@ -39,4 +39,5 @@ def evaluate():
         result.append(correctionDict)
 
     # logging.info("efficiency :{}".format(result))
-    return jsonify(result)
+    # return jsonify(result)
+    return result
