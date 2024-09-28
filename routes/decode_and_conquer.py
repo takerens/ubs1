@@ -1,7 +1,7 @@
 import json
 import logging
 
-from flask import request
+from flask import request, Flask
 from flask import Response
 
 
