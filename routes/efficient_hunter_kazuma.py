@@ -9,7 +9,7 @@ from routes import app
 logger = logging.getLogger(__name__)
 
 
-@app.route('/efficient_hunter_kazuma', methods=['POST'])
+@app.route('/efficient-hunter-kazuma', methods=['POST'])
 def evaluate():
     data = request.get_json()
     logging.info("data sent for evaluation {}".format(data))
